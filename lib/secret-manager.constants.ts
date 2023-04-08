@@ -1,0 +1,2 @@
+export const CLIENT_INSTANCE = 'CLIENT_INSTANCE';
+export const SECRETS_PARENT = 'SECRETS_PARENT';

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@google-cloud/secret-manager": "^4.2.1",
+    "@nestjs/common": "^9.4.0"
+  }
+}
