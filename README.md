@@ -13,6 +13,8 @@ import { SecretManagerModule } from 'nestjs-gcloud-secret-manager';
 @Module({
   imports: [
     SecretManagerModule.forRoot({
+      parent,
+      credentials
     })
   ],
 })
@@ -27,7 +29,7 @@ import { SecretManagerService } from 'nestjs-gcloud-secret-manager';
 export class AppService {
     constructor(private readonly secretManagerService: SecretManagerService) {}
     async getSecret() {
-        await this.secretManagerService.get(SECRET_NAME);
+        await this.secretManagerService.getSecret(SECRET_NAME);
     }
 }
 ```
