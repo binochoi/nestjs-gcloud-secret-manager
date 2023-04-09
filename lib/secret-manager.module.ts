@@ -12,16 +12,11 @@ export class SecretManagerModule {
         return SecretManagerModule.forRootAsync({ useValue: options });
     }
     static forRootAsync(asyncOptions: ModuleAsyncOptions<ModuleOptions>): DynamicModule {
-        const providers = [
+        const publicProviders = [
             {
                 inject: [MODULE_OPTIONS],
                 provide: CLIENT_INSTANCE,
                 useFactory: (moduleOptions: ModuleOptions) => new secretManager.SecretManagerServiceClient(moduleOptions),
-            },
-            {
-                inject: [MODULE_OPTIONS],
-                provide: SECRETS_PARENT,
-                useFactory: ({ parent }: ModuleOptions) => parent,
             },
             SecretManagerService
         ]
@@ -33,7 +28,12 @@ export class SecretManagerModule {
                     provide: MODULE_OPTIONS,
                     ...asyncOptions,
                 },
-                ...providers,
+                {
+                    inject: [MODULE_OPTIONS],
+                    provide: SECRETS_PARENT,
+                    useFactory: ({ parent }: ModuleOptions) => parent,
+                },
+                ...publicProviders,
                 {
                     inject: [SecretManagerService],
                     useFactory: async (secretManagerService: SecretManagerService) => {
@@ -42,7 +42,7 @@ export class SecretManagerModule {
                     provide: 'init'
                 }
             ],
-            exports: [...providers]
+            exports: [...publicProviders]
         }
     }
 }

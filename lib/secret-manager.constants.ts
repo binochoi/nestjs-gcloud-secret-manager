@@ -1,3 +1,4 @@
-export const CLIENT_INSTANCE = 'CLIENT_INSTANCE';
-export const SECRETS_PARENT = 'SECRETS_PARENT';
-export const MODULE_OPTIONS = 'MODULE_OPTIONS';
+const prefix = 'nestjs-gcloud-secret-manager/';
+export const CLIENT_INSTANCE = prefix + 'CLIENT_INSTANCE';
+export const SECRETS_PARENT = prefix + 'SECRETS_PARENT';
+export const MODULE_OPTIONS = prefix + 'MODULE_OPTIONS';
