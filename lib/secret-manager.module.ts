@@ -34,6 +34,13 @@ export class SecretManagerModule {
                     ...asyncOptions,
                 },
                 ...providers,
+                {
+                    inject: [SecretManagerService],
+                    useFactory: async (secretManagerService: SecretManagerService) => {
+                        await secretManagerService.getAllSecrets();
+                    },
+                    provide: 'init'
+                }
             ],
             exports: [...providers]
         }

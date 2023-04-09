@@ -9,6 +9,20 @@ export class SecretManagerService {
         @Inject(CLIENT_INSTANCE) private readonly client: SecretManagerClient,
         @Inject(SECRETS_PARENT) private readonly parent: string
     ) {}
+    async getAllSecrets() {
+        const [secrets] = await this.client.listSecrets({
+            parent: 'projects/' + this.parent,
+        });
+        secrets
+            .map(({ name }) => name?.split('/').slice(-1)[0])
+            .filter((name): name is string => name !== undefined)
+            .map(async (name) => {
+                const secret = await this.getSecret(name);
+                if(secret) {
+                    this._secrets.set(name, secret);
+                }
+            })
+    }
     async getSecret(secretName: string, version: 'latest' | number = 'latest') {
         const secretCache = this._secrets.get(secretName);
         if(secretCache) {
