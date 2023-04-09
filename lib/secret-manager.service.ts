@@ -1,9 +1,9 @@
 import { SecretManagerClient } from './types/index';
 import { Inject } from '@nestjs/common/decorators';
 import { CLIENT_INSTANCE, SECRETS_PARENT } from './secret-manager.constants';
-
+import { Injectable } from '@nestjs/common';
 const _secrets: Map<string, string> = new Map();
-Injectable()
+@Injectable()
 export class SecretManagerService {
     constructor(
         @Inject(CLIENT_INSTANCE) private readonly client: SecretManagerClient,
