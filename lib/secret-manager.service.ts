@@ -38,9 +38,10 @@ export class SecretManagerService {
         const [ secret ] = await this.client.accessSecretVersion({ name: secretFullName });
         
         const secretValue = secret.payload?.data?.toString();
-        if(secretValue) {
-            this._secrets.set(secretName, secretValue);
+        if(secretValue === undefined) {
+            throw new Error('there is empty secret.');
         }
+        this._secrets.set(secretName, secretValue);
         return secretValue;
     }
 }
