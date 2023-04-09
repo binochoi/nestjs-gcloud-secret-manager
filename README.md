@@ -4,7 +4,7 @@ Google Cloud Secret Manager module for Nest.js
 ```bash
 $ yarn add nestjs-gcloud-secret-manager
 ```
-# Example
+# Examples
 ## Setup
 ```typescript
 import { Module } from '@nestjs/common';
@@ -23,7 +23,6 @@ import { SecretManagerModule } from 'nestjs-gcloud-secret-manager';
 })
 export class AppModule {}
 ```
-# Examples
 ## using secret manager service
 ```typescript
 import { Injectable } from '@nestjs/common';
