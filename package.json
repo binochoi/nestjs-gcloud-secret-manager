@@ -1,7 +1,20 @@
 {
+  "name": "nestjs-gcloud-secret-manager",
+  "version": "0.0.3",
+  "description": "Google Cloud Secret Manager module for Nest.js",
+  "main": "dist/index.js",
+  "repository": "git@github.com:binochoi/nestjs-gcloud-secret-manager.git",
+  "author": "bino <bonoself@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc --project tsconfig.json"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^9.4.0"
+  },
   "dependencies": {
     "@google-cloud/secret-manager": "^4.2.1",
-    "@nestjs/common": "^9.4.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0"
   }
