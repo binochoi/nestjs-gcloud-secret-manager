@@ -25,13 +25,16 @@ export class SecretManagerService {
                 })
         )
     }
+    get(secretName: string) {
+        return this._secrets.get(secretName);
+    }
     /**
      * @param secretName
      *  `project/projectName/secrets/${secretName}/versions/version`
      * @param version
      *  `project/projectName/secrets/secretName/versions/${version}`
      */
-    async getSecret(secretName: string, version: 'latest' | number = 'latest') {
+    private async getSecret(secretName: string, version: 'latest' | number = 'latest') {
         const secretCache = this._secrets.get(secretName);
         if(secretCache) {
             return secretCache;
