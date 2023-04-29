@@ -9,7 +9,7 @@ export class SecretManagerService {
         @Inject(CLIENT_INSTANCE) private readonly client: SecretManagerClient,
         @Inject(SECRETS_PARENT) private readonly parent: string
     ) {}
-    async getAllSecrets() {
+    async getAllLatestSecrets() {
         const [secrets] = await this.client.listSecrets({
             parent: 'projects/' + this.parent,
         });
