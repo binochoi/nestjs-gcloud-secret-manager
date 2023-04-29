@@ -26,7 +26,7 @@ export class SecretManagerService {
         )
     }
     get(secretName: string) {
-        return this._secrets.get(secretName);
+        return this._secrets.get(secretName) || '';
     }
     /**
      * @param secretName
