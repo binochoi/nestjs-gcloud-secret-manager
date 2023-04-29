@@ -13,15 +13,17 @@ export class SecretManagerService {
         const [secrets] = await this.client.listSecrets({
             parent: 'projects/' + this.parent,
         });
-        secrets
-            .map(({ name }) => name?.split('/').slice(-1)[0])
-            .filter((name): name is string => name !== undefined)
-            .map(async (name) => {
-                const secret = await this.getSecret(name);
-                if(secret) {
-                    this._secrets.set(name, secret);
-                }
-            })
+        return Promise.all(
+            secrets
+                .map(({ name }) => name?.split('/').slice(-1)[0])
+                .filter((name): name is string => name !== undefined)
+                .map(async (name) => {
+                    const secret = await this.getSecret(name);
+                    if(secret) {
+                        this._secrets.set(name, secret);
+                    }
+                })
+        )
     }
     /**
      * @param secretName
