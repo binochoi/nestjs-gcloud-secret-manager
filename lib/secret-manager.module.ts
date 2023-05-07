@@ -2,7 +2,7 @@ import { ModuleAsyncOptions } from './types/index';
 import { Global, Module, DynamicModule } from '@nestjs/common';
 import { v1 as secretManager } from "@google-cloud/secret-manager";
 import { SecretManagerService } from './secret-manager.service';
-import { CLIENT_INSTANCE, MODULE_OPTIONS, SECRETS_PARENT, ASYNC_SECRETS } from './secret-manager.constants';
+import { CLIENT_INSTANCE, MODULE_OPTIONS, ASYNC_SECRETS } from './secret-manager.constants';
 import { ModuleOptions } from './types';
 import { SecretLoaderService } from './_secret-loader.service';
 
@@ -28,11 +28,6 @@ export class SecretManagerModule {
                 {
                     provide: MODULE_OPTIONS,
                     ...asyncOptions,
-                },
-                {
-                    inject: [MODULE_OPTIONS],
-                    provide: SECRETS_PARENT,
-                    useFactory: ({ parent }: ModuleOptions) => parent,
                 },
                 SecretLoaderService,
                 {

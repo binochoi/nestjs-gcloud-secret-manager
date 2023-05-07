@@ -1,17 +1,17 @@
-import { SecretManagerClient } from './types/index';
+import { ModuleOptions, SecretManagerClient } from './types/index';
 import { Inject } from '@nestjs/common/decorators';
-import { CLIENT_INSTANCE, SECRETS_PARENT } from './secret-manager.constants';
+import { CLIENT_INSTANCE, MODULE_OPTIONS } from './secret-manager.constants';
 import { Injectable } from '@nestjs/common';
 @Injectable()
 export class SecretLoaderService {
     constructor(
         @Inject(CLIENT_INSTANCE) private readonly client: SecretManagerClient,
-        @Inject(SECRETS_PARENT) private readonly parent: string
+        @Inject(MODULE_OPTIONS) private readonly config: ModuleOptions
     ) {}
     async getAllLatestSecrets() {
         const _secrets: Map<string, string> = new Map();
         const [secrets] = await this.client.listSecrets({
-            parent: 'projects/' + this.parent,
+            parent: 'projects/' + this.config.projectId,
         });
         await Promise.all(
             secrets
@@ -33,7 +33,7 @@ export class SecretLoaderService {
      *  `project/projectName/secrets/secretName/versions/${version}`
      */
     private async getSecret(secretName: string, version: 'latest' | number = 'latest') {
-        const secretFullName = `projects/${this.parent}/secrets/${secretName}/versions/${version}`;
+        const secretFullName = `projects/${this.config.projectId}/secrets/${secretName}/versions/${version}`;
         const [ secret ] = await this.client.accessSecretVersion({ name: secretFullName });
         
         const secretValue = secret.payload?.data?.toString();

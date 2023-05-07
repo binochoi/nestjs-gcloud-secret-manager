@@ -3,10 +3,7 @@ import type { ClientOptions } from 'google-gax/build/src/clientInterface';
 import { v1 as secretManager } from "@google-cloud/secret-manager";
 export type SecretManagerClient = secretManager.SecretManagerServiceClient;
 interface DefaultOptions {
-  /**
-   * projectId
-   **/
-  parent: string;
+  projectId: Exclude<ClientOptions['projectId'], undefined>
 }
 export type ModuleOptions = DefaultOptions & ClientOptions;
 

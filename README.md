@@ -16,7 +16,7 @@ import { SecretManagerModule } from 'nestjs-gcloud-secret-manager';
      * secrets are loaded to `SecretManagerService` when SecretManagerModule bootstrapped
      */
     SecretManagerModule.forRoot({
-      parent,
+      projectId,
       credentials
     })
   ],
