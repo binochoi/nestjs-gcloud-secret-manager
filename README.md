@@ -2,7 +2,13 @@
 Google Cloud Secret Manager module for Nest.js
 # Installation
 ```bash
+$ npm i nestjs-gcloud-secret-manager
+```
+```bash
 $ yarn add nestjs-gcloud-secret-manager
+```
+```bash
+$ pnpm add nestjs-gcloud-secret-manager
 ```
 # Examples
 ## Setup
